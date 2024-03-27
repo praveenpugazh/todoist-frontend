@@ -48,8 +48,10 @@ function App() {
   }
   return (
     <>
-      <h1 className='text-2xl font-bold text-center mt-5 mb-10'>Todoist!</h1>
-      <div className='flex w-full max-w-sm items-center space-x-2 m-auto'>
+      <h1 className='text-2xl font-bold text-center py-5 bg-slate-100'>
+        Todoist!
+      </h1>
+      <div className='w-[450px] m-auto my-10 flex justify-between items-center space-x-2'>
         <Input
           type='text'
           placeholder='Todo'
@@ -61,7 +63,7 @@ function App() {
         </Button>
         <Toaster />
       </div>
-      <div className='w-96 m-auto my-10'>
+      <div className='w-[450px] m-auto my-10'>
         <CardComp todos={todos} setTodos={setTodos} />
       </div>
     </>
