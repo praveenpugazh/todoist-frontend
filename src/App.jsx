@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Toaster } from '@/components/ui/toaster'
 import axios from 'axios'
 import { CardComp } from './components/ui/CardComp'
-
+import { API_URL } from './lib/constants'
 function App() {
   const [todo, setTodo] = useState({
     todo: '',
@@ -14,7 +14,7 @@ function App() {
   const [todos, setTodos] = useState([])
   const getTodos = async () => {
     try {
-      const { data } = await axios.get('http://localhost:8000/api/todos')
+      const { data } = await axios.get(`${API_URL}/todos`)
       setTodos(data)
     } catch (error) {
       console.log(error)
@@ -26,7 +26,7 @@ function App() {
   const { toast } = useToast()
   const submitTodo = async () => {
     try {
-      const { data } = await axios.post('http://localhost:8000/api/todos', todo)
+      const { data } = await axios.post(`${API_URL}/todos`, todo)
       toast({
         variant: 'success',
         title: 'Success',

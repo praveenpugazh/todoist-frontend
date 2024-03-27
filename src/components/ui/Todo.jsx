@@ -1,5 +1,6 @@
 import { Alert, AlertTitle } from '@/components/ui/alert'
 import { Toggle } from '@/components/ui/toggle'
+import { API_URL } from '@/lib/constants'
 import { CheckIcon, TrashIcon } from '@radix-ui/react-icons'
 import axios from 'axios'
 /* eslint-disable react/prop-types */
@@ -10,12 +11,9 @@ const Todo = ({ todo, todos, setTodos }) => {
   }
 
   const completeTodo = async (todoId, completed) => {
-    const { data } = await axios.put(
-      `http://localhost:8000/api/todo/${todoId}`,
-      {
-        completed: completed
-      }
-    )
+    const { data } = await axios.put(`${API_URL}/todo/${todoId}`, {
+      completed: completed
+    })
     console.log(data)
     const updatedTodos = todos.map((todo) =>
       todo._id === data._id ? data : todo
@@ -24,7 +22,7 @@ const Todo = ({ todo, todos, setTodos }) => {
     setTodos(updatedTodos)
   }
   const deleteTodo = async (todoId) => {
-    await axios.delete(`http://localhost:8000/api/todo/${todoId}`)
+    await axios.delete(`${API_URL}/todo/${todoId}`)
     const updatedTodos = todos.filter((todo) => todo._id !== todoId)
     setTodos(updatedTodos)
   }
