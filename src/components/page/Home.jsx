@@ -4,17 +4,22 @@ import { useToast } from '@/components/ui/use-toast'
 import { useEffect, useState } from 'react'
 import { Toaster } from '@/components/ui/toaster'
 import axios from 'axios'
-import { CardComp } from './components/ui/CardComp'
-import { API_URL } from './lib/constants'
-function App() {
+import { CardComp } from '../ui/CardComp'
+import { API_URL } from '../../lib/constants'
+function Home() {
   const [todo, setTodo] = useState({
     todo: '',
     completed: false
   })
   const [todos, setTodos] = useState([])
+  const authToken = localStorage.getItem('auth')
   const getTodos = async () => {
     try {
-      const { data } = await axios.get(`${API_URL}/todos`)
+      const { data } = await axios.get(`${API_URL}/todos`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      })
       setTodos(data)
     } catch (error) {
       console.log(error)
@@ -70,5 +75,5 @@ function App() {
   )
 }
 
-export default App
+export default Home
 
