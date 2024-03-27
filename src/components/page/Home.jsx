@@ -6,13 +6,23 @@ import { Toaster } from '@/components/ui/toaster'
 import axios from 'axios'
 import { CardComp } from '../ui/CardComp'
 import { API_URL } from '../../lib/constants'
+import { useNavigate } from 'react-router-dom'
+
 function Home() {
   const [todo, setTodo] = useState({
     todo: '',
     completed: false
   })
   const [todos, setTodos] = useState([])
+  const navigate = useNavigate()
+
   const authToken = localStorage.getItem('auth')
+  useEffect(() => {
+    if (!authToken) {
+      navigate('/login')
+    }
+  }, [authToken, navigate])
+
   const getTodos = async () => {
     try {
       const { data } = await axios.get(`${API_URL}/todos`, {
