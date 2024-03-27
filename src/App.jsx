@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Toaster } from '@/components/ui/toaster'
 import axios from 'axios'
 import { CardComp } from './components/ui/CardComp'
@@ -11,15 +11,31 @@ function App() {
     todo: '',
     completed: false
   })
+  const [todos, setTodos] = useState([])
+  const getTodos = async () => {
+    try {
+      const { data } = await axios.get('http://localhost:8000/api/todos')
+      setTodos(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    getTodos()
+  }, [])
   const { toast } = useToast()
   const submitTodo = async () => {
     try {
-      const data = await axios.post('http://localhost:8000/api/todos', todo)
-      console.log(data)
+      const { data } = await axios.post('http://localhost:8000/api/todos', todo)
       toast({
         variant: 'success',
         title: 'Success',
         description: 'Added todo successfully'
+      })
+      setTodos([...todos, data])
+      setTodo({
+        todo: '',
+        completed: false
       })
     } catch (error) {
       toast({
@@ -46,7 +62,7 @@ function App() {
         <Toaster />
       </div>
       <div className='w-96 m-auto my-10'>
-        <CardComp />
+        <CardComp todos={todos} setTodos={setTodos} />
       </div>
     </>
   )
