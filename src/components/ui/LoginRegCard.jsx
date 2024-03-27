@@ -20,9 +20,10 @@ export function LoginRegCard({ action }) {
   })
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate()
+
   useEffect(() => {
     const authToken = localStorage.getItem('auth')
-    console.log(authToken)
+
     if (authToken) {
       setIsLoggedIn(true)
     }
@@ -38,6 +39,7 @@ export function LoginRegCard({ action }) {
         password: postData.password
       })
       localStorage.setItem('auth', data.accessToken)
+      setIsLoggedIn(true)
     } catch (error) {
       console.log(error)
     }

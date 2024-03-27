@@ -38,10 +38,14 @@ function Home() {
   useEffect(() => {
     getTodos()
   }, [])
+
   const { toast } = useToast()
+
   const submitTodo = async () => {
     try {
-      const { data } = await axios.post(`${API_URL}/todos`, todo)
+      const { data } = await axios.post(`${API_URL}/todos`, todo, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      })
       toast({
         variant: 'success',
         title: 'Success',
@@ -63,9 +67,10 @@ function Home() {
   }
   return (
     <>
-      <h1 className='text-2xl font-bold text-center py-5 bg-slate-100'>
-        Todoist!
-      </h1>
+      <div className='text-2xl font-bold text-center p-5 bg-slate-100 flex justify-between'>
+        <h1>Todoist!</h1>
+        <Button onClick={() => localStorage.removeItem('auth')}>Logout</Button>
+      </div>
       <div className='w-[450px] m-auto my-10 flex justify-between items-center space-x-2'>
         <Input
           type='text'
