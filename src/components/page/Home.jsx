@@ -69,7 +69,14 @@ function Home() {
     <>
       <div className='text-2xl font-bold text-center p-5 bg-slate-100 flex justify-between'>
         <h1>Todoist!</h1>
-        <Button onClick={() => localStorage.removeItem('auth')}>Logout</Button>
+        <Button
+          onClick={() => {
+            localStorage.removeItem('auth')
+            navigate('/login')
+          }}
+        >
+          Logout
+        </Button>
       </div>
       <div className='w-[450px] m-auto my-10 flex justify-between items-center space-x-2'>
         <Input
