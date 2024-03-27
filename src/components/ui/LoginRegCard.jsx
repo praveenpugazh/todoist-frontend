@@ -53,7 +53,7 @@ export function LoginRegCard({ action }) {
     }
   }
   return (
-    <Card className='w-[500px]'>
+    <Card className='w-[380px] md:w-[500px]'>
       <CardHeader>
         <CardTitle>{action === 'register' ? 'Register' : 'Login'}</CardTitle>
         <CardDescription>

@@ -10,7 +10,7 @@ import Todo from './Todo'
 // eslint-disable-next-line react/prop-types
 export function CardComp({ todos, setTodos }) {
   return (
-    <Card className='w-[450px]'>
+    <Card className='w-[380px] md:w-[450px]'>
       <CardHeader>
         <CardTitle>Your Todo</CardTitle>
         <CardDescription>Please find your todo&apos;s below</CardDescription>

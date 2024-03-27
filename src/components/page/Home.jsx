@@ -78,7 +78,7 @@ function Home() {
           Logout
         </Button>
       </div>
-      <div className='w-[450px] m-auto my-10 flex justify-between items-center space-x-2'>
+      <div className='w-[380px] md:w-[450px] m-auto my-10 flex justify-between items-center space-x-2'>
         <Input
           type='text'
           placeholder='Todo'
@@ -90,7 +90,7 @@ function Home() {
         </Button>
         <Toaster />
       </div>
-      <div className='w-[450px] m-auto my-10'>
+      <div className='w-[380px] md:w-[450px] m-auto my-10'>
         <CardComp todos={todos} setTodos={setTodos} />
       </div>
     </>
