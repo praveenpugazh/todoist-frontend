@@ -134,11 +134,13 @@ export function LoginRegCard({ action }) {
         <CardFooter>
           {action !== 'register' ? (
             <p>
-              Don&apos;t have an account? <a href='/register'>Register</a>
+              Don&apos;t have an account?{' '}
+              <a onClick={() => navigate('/register')}>Register</a>
             </p>
           ) : (
             <p>
-              Have an account already? <a href='/login'>Login</a>
+              Have an account already?{' '}
+              <a onClick={() => navigate('/register')}>Login</a>
             </p>
           )}
         </CardFooter>
