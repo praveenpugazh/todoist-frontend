@@ -14,7 +14,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
-
 // eslint-disable-next-line react/prop-types
 export function LoginRegCard({ action }) {
   const [postData, setPostData] = useState({
@@ -135,12 +134,22 @@ export function LoginRegCard({ action }) {
           {action !== 'register' ? (
             <p>
               Don&apos;t have an account?{' '}
-              <a onClick={() => navigate('/register')}>Register</a>
+              <span
+                className='cursor-pointer'
+                onClick={() => navigate('/register')}
+              >
+                Register
+              </span>
             </p>
           ) : (
             <p>
               Have an account already?{' '}
-              <a onClick={() => navigate('/register')}>Login</a>
+              <span
+                className='cursor-pointer'
+                onClick={() => navigate('/login')}
+              >
+                Login
+              </span>
             </p>
           )}
         </CardFooter>
