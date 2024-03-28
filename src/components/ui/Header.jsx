@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className='text-2xl font-bold text-center p-5 bg-slate-100 flex justify-between'>
       <h1>Todoist!</h1>
-      <div className='flex space-x-4'>
+      <div className='flex items-center space-x-4'>
         <p>Hello {userData.username}</p>
         <Button
           onClick={() => {
