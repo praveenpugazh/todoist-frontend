@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
@@ -93,6 +94,20 @@ export function LoginRegCard({ action }) {
           {action === 'register' ? 'Register' : 'Login'}
         </Button>
       </CardContent>
+
+      <CardFooter>
+        {action !== 'register' ? (
+          <p>
+            Don&apos;t have an account? <a href='/register'>Register</a>
+          </p>
+        ) : (
+          <p>
+            Have an account already? <a href='/login'>Login</a>
+          </p>
+        )}
+      </CardFooter>
+
+      <></>
     </Card>
   )
 }
