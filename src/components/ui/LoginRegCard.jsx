@@ -10,12 +10,15 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { API_URL } from '@/lib/constants'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
+import UserContext from '../../context/UserContext'
 // eslint-disable-next-line react/prop-types
 export function LoginRegCard({ action }) {
+  const { setUserLogin } = useContext(UserContext)
+
   const [postData, setPostData] = useState({
     name: '',
     email: '',
@@ -31,7 +34,6 @@ export function LoginRegCard({ action }) {
       setIsLoggedIn(true)
     }
     if (isLoggedIn) {
-      console.log('logged in')
       navigate('/')
     }
   }, [isLoggedIn, navigate])
@@ -43,7 +45,7 @@ export function LoginRegCard({ action }) {
         email: postData.email,
         password: postData.password
       })
-      localStorage.setItem('auth', data.accessToken)
+      setUserLogin(data)
       setIsLoggedIn(true)
 
       toast({

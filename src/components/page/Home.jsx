@@ -9,6 +9,7 @@ import { API_URL } from '../../lib/constants'
 import { useNavigate } from 'react-router-dom'
 import { SkeletonCard } from '../ui/SkeletonCard'
 import { ButtonLoading } from '../ui/ButtonWithLoading'
+import Header from '../ui/Header'
 
 function Home() {
   const [todo, setTodo] = useState({
@@ -75,17 +76,7 @@ function Home() {
   }
   return (
     <>
-      <div className='text-2xl font-bold text-center p-5 bg-slate-100 flex justify-between'>
-        <h1>Todoist!</h1>
-        <Button
-          onClick={() => {
-            localStorage.removeItem('auth')
-            navigate('/login')
-          }}
-        >
-          Logout
-        </Button>
-      </div>
+      <Header />
       <div className='w-[380px] md:w-[450px] m-auto my-10 flex justify-between items-center space-x-2'>
         <Input
           type='text'
