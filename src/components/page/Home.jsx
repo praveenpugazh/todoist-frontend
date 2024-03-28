@@ -7,6 +7,8 @@ import axios from 'axios'
 import { CardComp } from '../ui/CardComp'
 import { API_URL } from '../../lib/constants'
 import { useNavigate } from 'react-router-dom'
+import { SkeletonCard } from '../ui/SkeletonCard'
+import { ButtonLoading } from '../ui/ButtonWithLoading'
 
 function Home() {
   const [todo, setTodo] = useState({
@@ -14,6 +16,8 @@ function Home() {
     completed: false
   })
   const [todos, setTodos] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [buttonLoading, setButtonLoading] = useState(false)
   const navigate = useNavigate()
 
   const authToken = localStorage.getItem('auth')
@@ -25,12 +29,14 @@ function Home() {
 
   const getTodos = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.get(`${API_URL}/todos`, {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
       })
       setTodos(data)
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -43,6 +49,7 @@ function Home() {
 
   const submitTodo = async () => {
     try {
+      setButtonLoading(true)
       const { data } = await axios.post(`${API_URL}/todos`, todo, {
         headers: { Authorization: `Bearer ${authToken}` }
       })
@@ -56,6 +63,7 @@ function Home() {
         todo: '',
         completed: false
       })
+      setButtonLoading(false)
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -85,13 +93,21 @@ function Home() {
           value={todo.todo}
           onChange={(e) => setTodo({ ...todo, todo: e.target.value })}
         />
-        <Button type='submit' onClick={submitTodo}>
-          Add Todo
-        </Button>
+        {!buttonLoading ? (
+          <Button type='submit' onClick={submitTodo}>
+            Add Todo
+          </Button>
+        ) : (
+          <ButtonLoading />
+        )}
         <Toaster />
       </div>
       <div className='w-[380px] md:w-[450px] m-auto my-10'>
-        <CardComp todos={todos} setTodos={setTodos} />
+        {loading ? (
+          <SkeletonCard />
+        ) : (
+          <CardComp todos={todos} setTodos={setTodos} />
+        )}
       </div>
     </>
   )
